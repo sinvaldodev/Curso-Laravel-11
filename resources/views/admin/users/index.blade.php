@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('admin.layouts.layouts.app')
+@section('title', 'listagem dos usuários')
+
+
+@section('content')
     <h1>Usuários</h1>
+
+    @if (session()->has('success'))
+        {{ session('success') }}
+    @endif
+
+    <a href="{{ route('users.create') }}">New</a>
 
     <table>
         <thead>
@@ -18,14 +20,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @forelse ($users as $user)
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>-</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="100">Nenhum usuário no banco</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
-</body>
-</html>
+
+    {{ $users->links() }}
+
+@endsection
