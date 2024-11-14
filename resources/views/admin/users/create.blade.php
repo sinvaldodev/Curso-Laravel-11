@@ -5,15 +5,8 @@
 @section('content')
 <h1>Novo Usuário</h1>
 
-
-{{-- Verificação de erro --}}
-@if ($errors->any())
-    <ul>
-        @foreach ( $errors->all() as $error )
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+{{-- @include('admin.includes.errors'); --}}
+<x-alert />
 
 {{-- Formulário de cadastro --}}
 <form action=" {{ route('users.store') }} " method="POST">

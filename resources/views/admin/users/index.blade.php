@@ -5,11 +5,9 @@
 @section('content')
     <h1>Usuários</h1>
 
-    @if (session()->has('success'))
-        {{ session('success') }}
-    @endif
-
     <a href="{{ route('users.create') }}">New</a>
+
+    <x-alert />
 
     <table>
         <thead>
